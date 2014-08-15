@@ -1,0 +1,3 @@
+- Check for requirements (e.g. docker)
+- Finish http plugin
+- Test cpan plugin

@@ -1,0 +1,65 @@
+#!/bin/sh
+
+QUICKPATH=${QUICKPATH:-~/.quick}
+
+COMMAND=$1; shift
+ARGS=$*
+
+if [ ! -d "$QUICKPATH" ]; then
+    echo "Your quick installation is broken. Please check:"
+    echo "Path: $QUICKPATH"
+    exit 1
+fi
+
+# Daily Update check
+# Only if git installation and an origin exists
+if [ -d "$QUICKPATH/.git" ] && [ $(git remote -v | grep -c origin) -gt 0 ]; then
+    if [ ! -f "$QUICKPATH/last_update_check" ]; then
+        touch "$QUICKPATH/last_update_check"
+    fi
+    LAST_UPDATE_CHECK=$(cat "$QUICKPATH/last_update_check")
+    TODAY=$(date "+%d.%m.%Y")
+    if [ ! "$TODAY" = "$LAST_UPDATE_CHECK" ]; then
+        echo "Checking for updates..."
+        OLD_CWD=$(pwd)
+        cd $QUICKPATH
+        git pull origin master
+        cd $OLD_CWD
+        # We can't use echo -n because that's not POSIX compatible...
+        printf "%s" "$TODAY" > "$QUICKPATH/last_update_check"
+    fi
+fi
+
+# Help
+if [ "$COMMAND" = "" ]; then
+    echo "usage: $0 [command]"
+    echo "       $0 help [command]"
+    echo
+    echo "Available plugins:"
+    for filename in $QUICKPATH/plugins/*.sh; do
+        echo " - $(basename $filename .sh)"
+    done
+    exit 1
+fi
+
+CMDPREFIX="quick"
+if [ "$COMMAND" = "help" ]; then
+    COMMAND=$1
+    ARGS=
+    CMDPREFIX="help"
+fi
+
+# Execute plugin
+QUICKFILE="$QUICKPATH/plugins/$COMMAND.sh"
+if [ -f "$QUICKFILE" ]; then
+    source "$QUICKFILE"
+    type ${CMDPREFIX}_${COMMAND} > /dev/null 2>&1
+    if [ $? -gt 0 ]; then
+        echo "quick: Method $CMDPREFIX is not available for plugin $COMMAND"
+        exit 1
+    fi
+    ${CMDPREFIX}_${COMMAND} $ARGS
+else
+    echo "Plugin named $COMMAND not found"
+    exit 1
+fi
