@@ -1,7 +1,7 @@
 quick
 =====
 
-A collection of useful mini-commands which I often need, but can't remember
+A collection of useful mini-commands which I often need, but I'm too lazy too type.
 
 
 # Installation
@@ -21,6 +21,19 @@ PATH=$PATH:~/.quick
 # Usage
 
 Call **quick** without arguments to get a list of all available plugins.
+
+# Provided Plugins
+
+Please note that most plugins require [Docker](https://www.docker.com/).
+
+* ubuntu [image]
+  Open a shell inside an Ubuntu 14.04 (or other image) docker container
+
+* cpan [directory]
+  Create/Update a local CPAN mirror
+
+* http [directory]
+  Service a local directory.
 
 # Writing plugins
 
