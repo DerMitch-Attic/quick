@@ -18,6 +18,12 @@ ln -s ~/.quick/quick ~/.bin/quick
 PATH=$PATH:~/.quick
 ```
 
+To enable shell (bash/zsh) completition, add the following line to your .bashrc/.zshrc:
+
+```bash
+source ~/.quick/shell_complete.sh
+```
+
 # Usage
 
 Call **quick** without arguments to get a list of all available plugins.
