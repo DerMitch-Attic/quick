@@ -55,6 +55,13 @@ if [ "$COMMAND" = "help" ]; then
     CMDPREFIX="help"
 fi
 
+if [ "$COMMAND" = "plugins" ]; then
+    for filename in $QUICKPATH/plugins/*.sh; do
+        echo "$(basename $filename .sh)"
+    done
+    exit 0
+fi
+
 # Execute plugin
 QUICKFILE="$QUICKPATH/plugins/$COMMAND.sh"
 if [ -f "$QUICKFILE" ]; then
