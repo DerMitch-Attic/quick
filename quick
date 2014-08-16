@@ -15,7 +15,9 @@ fi
 # Functions
 #
 quick_require() {
-    type $1 >/dev/null 2>&1 || { echo >&2 "Required command $1 not found"; exit 1; }
+    for arg in $*; do
+        type $arg >/dev/null 2>&1 || { echo >&2 "Required command $arg not found"; exit 1; }
+    done
 }
 
 # Daily Update check
