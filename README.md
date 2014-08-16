@@ -26,14 +26,11 @@ Call **quick** without arguments to get a list of all available plugins.
 
 Please note that most plugins require [Docker](https://www.docker.com/).
 
-* ubuntu [image]
-  Open a shell inside an Ubuntu 14.04 (or other image) docker container
-
-* cpan [directory]
-  Create/Update a local CPAN mirror
-
-* http [directory]
-  Service a local directory.
+Plugin       | Description
+------------ | -------------
+ubuntu [image] | Open a shell inside an Ubuntu 14.04 (or other image) docker container
+cpan [directory] | Create/Update a local CPAN mirror
+http [directory] | Service a local directory.
 
 # Writing plugins
 
