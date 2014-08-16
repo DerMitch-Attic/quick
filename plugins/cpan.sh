@@ -1,4 +1,6 @@
 quick_cpan() {
+	quick_require docker
+
 	CPANCACHE=${CPANCACHE:-~/.cpancache}
 	
 	if [ "$CPANMIRROR" = "" ]; then

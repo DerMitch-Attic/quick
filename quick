@@ -11,6 +11,13 @@ if [ ! -d "$QUICKPATH" ]; then
     exit 1
 fi
 
+#
+# Functions
+#
+quick_require() {
+    type $1 >/dev/null 2>&1 || { echo >&2 "Required command $1 not found"; exit 1; }
+}
+
 # Daily Update check
 # Only if git installation and an origin exists
 if [ -d "$QUICKPATH/.git" ] && [ $(git remote -v | grep -c origin) -gt 0 ]; then
