@@ -2,8 +2,13 @@
 
 QUICKPATH=${QUICKPATH:-~/.quick}
 
-COMMAND=$1; shift
-ARGS=$*
+if [ "$#" -gt 0 ]; then
+    COMMAND=$1; shift 
+    ARGS=$*
+else
+    COMMAND=""
+    ARGS=""
+fi
 
 if [ ! -d "$QUICKPATH" ]; then
     echo "Your quick installation is broken. Please check:"
