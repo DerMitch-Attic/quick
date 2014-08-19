@@ -65,7 +65,7 @@ fi
 # Execute plugin
 QUICKFILE="$QUICKPATH/plugins/$COMMAND.sh"
 if [ -f "$QUICKFILE" ]; then
-    source "$QUICKFILE"
+    . "$QUICKFILE"
     type ${CMDPREFIX}_${COMMAND} > /dev/null 2>&1
     if [ $? -gt 0 ]; then
         echo "quick: Method $CMDPREFIX is not available for plugin $COMMAND"
