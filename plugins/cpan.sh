@@ -13,8 +13,10 @@ quick_cpan() {
 
 help_cpan() {
 	echo "usage: quick cpan"
-	echo "You can configure the command using the following environment variables:"
 	echo
-	echo "- CPANCACHE    Local cache directory (defaults to ~/.cpancache)"
-	echo "- CPANMIRROR   CPAN mirror to use (required)"
+	echo "  Creates or updates a local CPAN mirror."
+	echo
+	echo "  Environment variables:"
+	echo "  - CPANCACHE    Local cache directory (defaults to ~/.cpancache)"
+	echo "  - CPANMIRROR   CPAN mirror to use (required)"
 }
